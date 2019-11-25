@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/style.css';
+import './style/style.scss';
 const App = () => {
   return <div>Hello World</div>;
 };
