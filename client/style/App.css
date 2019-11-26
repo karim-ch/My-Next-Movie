@@ -1,0 +1,48 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-size: cover;
+  color: white !important;
+}
+.my-main-app {
+  background: linear-gradient(
+    90deg,
+    rgba(8, 31, 39, 1) 0%,
+    rgb(35, 54, 74) 35%,
+    rgba(242, 79, 117, 1) 100%
+  );
+  max-height: 900px;
+}
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #c9c2c2;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: rgba(242, 79, 117, 0.8);
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

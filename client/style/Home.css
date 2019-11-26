@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+.home-intro {
+  height: 700px;
+  background-image: url('https://images3.alphacoders.com/104/1041825.jpg');
+  /* background-size: cover; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: rgb(7, 30, 38);
+  background: linear-gradient(
+    90deg,
+    rgba(7, 30, 38, 1) 0%,
+    rgba(113, 115, 164, 0.4) 45%,
+    rgb(32, 25, 117) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.intro-data {
+  width: 70%;
+  height: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.intro-data h1 {
+  font-size: 4rem;
+  color: white;
+  margin-bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 5px 29px 15px rgba(0, 0, 0, 0.4);
+}
+.swap-logo {
+  background: -webkit-linear-gradient(
+    rgb(7, 57, 73),
+    #ffc286,
+    rgb(196, 102, 102)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 18px -16px 16px rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+}
+.search-container {
+  width: 100%;
+}
+.search-container input {
+  width: 350px;
+  height: 40px;
+  border: 2px solid #ffc286;
+  border-radius: 15px 0px 0px 15px;
+  padding-left: 20px;
+  color: white;
+  font-size: 16px;
+  background: transparent;
+}
+.search-container button {
+  height: 40px;
+  width: 100px;
+  background-color: #ffc286;
+  border: solid #ffc286;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  border-radius: 0px 15px 15px 0px;
+}
+.search-container input::placeholder {
+  color: white;
+}
+.artist-data {
+  height: 320px;
+  font-size: 15px;
+  width: 300px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-align: left;
+  padding: 15px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 4px 5px 28px 7px rgba(71, 163, 207, 0.1);
+}
+.artist-data:hover {
+  height: 330px;
+  width: 310px;
+  border-radius: 20px;
+}
+.artist-option {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px;
+  position: relative;
+}
+.block-down-card {
+  padding-top: 60px;
+  box-sizing: border-box;
+  height: 80%;
+}
+.data-result {
+  color: rgb(147, 178, 188);
+}
+.card-icons i {
+  margin: 0px 5px;
+}
+/***********Start styling stars*********/
+.normal-star {
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.normal-star:hover {
+  font-weight: bold;
+  color: rgba(57, 52, 79, 0.6);
+}
+.fav-star {
+  color: #edcd6d;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+@media screen and (max-width: 767px) {
+  .search-container input {
+    width: 50%;
+  }
+
+  .intro-data h1 {
+    font-size: 3rem;
+  }
+}
+@media screen and (max-width: 992px) {
+  .text-blur-out {
+    font-size: 3.3rem !important;
+  }
+}
+/*****************ANIMISTA***********************/
+
+.text-blur-out {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  -webkit-animation: text-blur-out 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: text-blur-out 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@-webkit-keyframes text-blur-out {
+  0% {
+    -webkit-filter: blur(0.01);
+    filter: blur(0.01);
+  }
+  100% {
+    -webkit-filter: blur(12px) opacity(0%);
+    filter: blur(12px) opacity(0%);
+  }
+}
+@keyframes text-blur-out {
+  0% {
+    -webkit-filter: blur(0.01);
+    filter: blur(0.01);
+  }
+  100% {
+    -webkit-filter: blur(12px) opacity(0%);
+    filter: blur(12px) opacity(0%);
+  }
+}
