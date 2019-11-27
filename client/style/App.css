@@ -7,11 +7,12 @@
 .my-main-app {
   background: linear-gradient(
     90deg,
-    rgba(8, 31, 39, 1) 0%,
-    rgb(35, 54, 74) 35%,
-    rgba(242, 79, 117, 1) 100%
+    rgba(255, 254, 248, 0.28) 0%,
+    rgba(124, 124, 138, 0.4) 45%,
+    rgba(189, 189, 189, 0.21) 100%
   );
-  max-height: 900px;
+
+  min-height: 100vh;
 }
 .App-logo {
   height: 40vmin;
@@ -34,12 +35,12 @@ body::-webkit-scrollbar {
 
 /* Track */
 body::-webkit-scrollbar-track {
-  background: #c9c2c2;
+  background: #5b64af;
 }
 
 /* Handle */
 body::-webkit-scrollbar-thumb {
-  background: rgba(242, 79, 117, 0.8);
+  background: rgb(13, 8, 80) 80%;
 }
 
 /* Handle on hover */

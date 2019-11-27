@@ -17,18 +17,6 @@ export default {
       {
         use: ['style-loader', 'css-loader'],
         test: /\.css$/
-      },
-      {
-        test: /\.(png|jp(e*)g|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8000, // Convert images < 8kb to base64 strings
-              name: 'images/[hash]-[name].[ext]'
-            }
-          }
-        ]
       }
     ]
   },
@@ -36,6 +24,9 @@ export default {
     new HtmlWebpackPlugin({
       template: 'client/index.html'
     }),
-    new LiveReloadPlugin()
+    new LiveReloadPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      //..
+    })
   ]
 };

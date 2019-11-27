@@ -1,49 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NewFilms from '../NewFilms';
 import '../../style/Home.css';
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputData: ''
-    };
-    this.changeInput = this.changeInput.bind(this);
-    this.displayFilm = this.displayFilm.bind(this);
-  }
+export default function Home() {
+  const search = useSearchFormInput('');
 
-  changeInput(e) {
-    this.setState({
-      inputData: e.target.value
-    });
-  }
-  displayFilm(e) {}
-  render() {
-    const { inputData } = this.state;
-    return (
+  return (
+    <div>
       <div className="row home-intro">
         <div className="col-12 overlay">
           <div className="intro-data">
-            <h1>
-              {' '}
-              Welcome To <span className="swap-logo">MovieApp</span>
-            </h1>
             <h1 className="text-blur-out">
               {' '}
               Welcome To <span className="swap-logo">MovieApp</span>
             </h1>
             <div className="search-container">
-              <input
-                value={inputData}
-                onChange={this.changeInput}
-                placeholder="Search for a film"
-              />
-              <button onClick={this.displayFilm}>Search</button>
+              <input {...search} placeholder="Search for a film" />
+              <button onClick={displayFilm}>Search</button>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+      <NewFilms />
+    </div>
+  );
 }
 
-export default Home;
+function displayFilm(e) {
+  console.log(e);
+}
+
+function useSearchFormInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+  function handleSearchChange(e) {
+    console.log(e.target.value);
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleSearchChange
+  };
+}
