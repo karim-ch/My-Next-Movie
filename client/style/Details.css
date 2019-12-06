@@ -1,0 +1,7 @@
+.movie-details {
+  height: 400px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  background-position: 50% 50%;
+}
