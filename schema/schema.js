@@ -24,6 +24,23 @@ const NewPlayingType = new GraphQLObjectType({
   }
 });
 
+// Get movie details
+const MovieDetailsType = new GraphQLObjectType({
+  name: 'MovieDetails',
+  fields: {
+    id: { type: GraphQLString },
+    overview: { type: GraphQLString },
+    title: { type: GraphQLString },
+    poster_path: { type: GraphQLString },
+    genres: { type: GraphQLString },
+    release_date: { type: GraphQLString },
+    vote_average: { type: GraphQLString },
+    production_companies: { type: GraphQLString },
+    vote_average: { type: GraphQLString },
+    runtime: { type: GraphQLString }
+  }
+});
+
 // Root Query
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -43,6 +60,24 @@ const RootQuery = new GraphQLObjectType({
                   'https://image.tmdb.org/t/p/w500' + movie.poster_path)
             );
             return movies;
+          });
+      }
+    },
+    movieDetails: {
+      type: MovieDetailsType,
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${args.id}?api_key=${api_key}&language=en-US&page=1`
+          )
+          .then(res => {
+            const movie = res.data;
+            movie.genres = movie.genres.map(g => g.name).join(', ');
+            movie.production_companies = movie.production_companies
+              .map(g => g.name)
+              .join(', ');
+            return movie;
           });
       }
     }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NewFilms from '../NewFilms';
+import NewMovies from '../NewMovies';
 import '../../style/Home.css';
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <NewFilms />
+      <NewMovies />
     </div>
   );
 }
