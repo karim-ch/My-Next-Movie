@@ -2,8 +2,9 @@ import React from 'react';
 import MovieItem from '../MovieItem';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import '../../style/MovieList.css';
 
-export default function NewFilms() {
+export default function MovieList() {
   return (
     <Query query={query}>
       {({ loading, error, data }) => {

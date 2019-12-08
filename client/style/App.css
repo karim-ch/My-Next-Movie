@@ -3,47 +3,17 @@
   min-height: 100vh;
   background-size: cover;
   color: white !important;
-}
-.my-main-app {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 254, 248, 0.28) 0%,
-    rgba(124, 124, 138, 0.4) 45%,
-    rgba(189, 189, 189, 0.21) 100%
-  );
-
+  position: relative;
   min-height: 100vh;
 }
+
 .App-logo {
   height: 40vmin;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 body::-webkit-scrollbar {
   width: 10px;
 }
-
-/* Track */
-body::-webkit-scrollbar-track {
-  background: #5b64af;
-}
-
 /* Handle */
 body::-webkit-scrollbar-thumb {
-  background: rgb(13, 8, 80) 80%;
-}
-
-/* Handle on hover */
-body::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgb(85, 85, 84) 80%;
 }

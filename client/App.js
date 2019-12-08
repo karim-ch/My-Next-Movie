@@ -15,17 +15,15 @@ const client = new ApolloClient({
 
 const Root = () => {
   return (
-    <div className="App" style={{ position: 'relative' }}>
-      <div className="container-fluid my-main-app">
-        <HashRouter>
-          <ApolloProvider client={client}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/details/:id" component={Details} />
-            </Switch>
-          </ApolloProvider>
-        </HashRouter>
-      </div>
+    <div className="App container-fluid">
+      <HashRouter>
+        <ApolloProvider client={client}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/details/:id" component={Details} />
+          </Switch>
+        </ApolloProvider>
+      </HashRouter>
     </div>
   );
 };

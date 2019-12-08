@@ -11,7 +11,6 @@ import axios from 'axios';
 
 // Import the Api Key
 import { api_key } from '../config';
-console.log(api_key);
 
 // Get the newest Films
 const NewPlayingType = new GraphQLObjectType({

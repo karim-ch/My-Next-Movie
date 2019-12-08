@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+.home-intro {
+  height: 600px;
+  background-image: url('https://images3.alphacoders.com/104/1041825.jpg');
+  background-size: cover;
+  position: relative;
+}
+.overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 254, 248, 0.28) 0%,
+    rgba(124, 124, 138, 0.4) 45%,
+    rgba(189, 189, 189, 0.21) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.intro-data {
+  width: 70%;
+  height: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.intro-data h1 {
+  font-size: 4rem;
+  color: white;
+  margin-bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 5px 29px 15px rgba(0, 0, 0, 0.4);
+}
+.swap-logo {
+  background: -webkit-linear-gradient(
+    rgb(7, 57, 73),
+    #ffc286,
+    rgb(196, 102, 102)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.search-container {
+  width: 100%;
+}
+.search-container input {
+  width: 350px;
+  height: 40px;
+  border: 2px solid #ffc286;
+  border-radius: 15px 0px 0px 15px;
+  padding-left: 20px;
+  color: white;
+  font-size: 16px;
+  background: transparent;
+}
+.search-container button {
+  height: 40px;
+  width: 100px;
+  background-color: #ffc286;
+  border: solid #ffc286;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  border-radius: 0px 15px 15px 0px;
+}
+.search-container input::placeholder {
+  color: white;
+}
