@@ -62,6 +62,25 @@ const RootQuery = new GraphQLObjectType({
           });
       }
     },
+
+    TopRated: {
+      type: new GraphQLList(NewPlayingType),
+      resolve() {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}&language=en-US&page=1`
+          )
+          .then(res => {
+            const movies = res.data.results;
+            movies.map(
+              movie =>
+                (movie.poster_path =
+                  'https://image.tmdb.org/t/p/w500' + movie.poster_path)
+            );
+            return movies;
+          });
+      }
+    },
     movieDetails: {
       type: MovieDetailsType,
       args: { id: { type: GraphQLString } },

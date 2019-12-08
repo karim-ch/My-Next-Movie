@@ -6,7 +6,7 @@ import '../../style/MovieList.css';
 
 export default function MovieList() {
   return (
-    <Query query={query}>
+    <Query query={NowPlayingQuery}>
       {({ loading, error, data }) => {
         if (loading) return <div>LOADING</div>;
         if (error) return <div>SERVER ERROR</div>;
@@ -30,8 +30,7 @@ export default function MovieList() {
     </Query>
   );
 }
-
-const query = gql`
+const NowPlayingQuery = gql`
   {
     NowPlaying {
       id

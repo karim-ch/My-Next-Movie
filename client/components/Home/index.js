@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div>
       <Cover />
-      <MovieList />
-      <MovieList />
+      <MovieList type="now_playing" />
+      <MovieList type="top_rated" />
     </div>
   );
 }
