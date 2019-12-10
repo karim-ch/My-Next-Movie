@@ -4,4 +4,125 @@
   background-repeat: no-repeat;
   position: relative;
   background-position: 50% 50%;
+  display: flex;
+  flex-direction: column;
+  background-attachment: fixed;
+  align-items: flex-end;
+  margin: 0px;
+  padding: 0 !important;
+}
+.movie-details > div {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.movie-details-title {
+  font-size: 4rem;
+  text-shadow: 2px 7px 15px rgba(255, 255, 255, 0.4);
+}
+.back-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.movie-photo-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+}
+.movie-photo {
+  position: absolute;
+  width: 295px;
+  height: 80%;
+  left: 130px;
+  box-shadow: 3px 2px 5px;
+  top: -90px;
+  color: rgb(214, 214, 214);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.arrow {
+  position: fixed;
+  top: 50px;
+  left: 30px;
+  width: 3vmin;
+  height: 3vmin;
+  background: transparent;
+  border-top: 1vmin solid rgb(214, 214, 214);
+  border-right: 1vmin solid rgb(214, 214, 214);
+  box-shadow: 0 0 0 lightgray;
+  transition: all 200ms ease;
+}
+
+.left {
+  transform: translate3d(0, -50%, 0) rotate(-135deg);
+}
+
+.left:hover {
+  border-color: orange;
+  box-shadow: 0.5vmin -0.5vmin 0 rgb(214, 214, 214);
+}
+
+.arrow:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -60%) rotate(45deg);
+  width: 200%;
+  height: 200%;
+}
+
+.movie-details-info-section {
+  text-align: left;
+}
+
+.title-details-title {
+  color: black;
+  font-size: 3rem;
+}
+.title-details-text {
+  color: black;
+  font-size: 1rem;
+  padding: 5px;
+}
+/*******************start media queries*****************/
+@media screen and (max-width: 1278px) {
+  .movie-photo {
+    left: 50px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .movie-details-title {
+    font-size: 2rem;
+    text-shadow: 2px 7px 15px rgba(255, 255, 255, 0.4);
+  }
+
+  .movie-details {
+    height: 250px;
+  }
+
+  .movie-photo-container {
+    position: relative;
+    width: 200px;
+    height: 300px;
+  }
+
+  .movie-details > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .movie-photo {
+    top: -40px;
+  }
 }

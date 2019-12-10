@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { average_on_five } from '../../utils';
 import BeautyStars from 'beauty-stars';
 
 export default function FilmItem({ movie }) {
@@ -21,10 +22,4 @@ export default function FilmItem({ movie }) {
       </div>
     </Link>
   );
-}
-
-function average_on_five(vote_average) {
-  const n = parseInt(vote_average);
-  const vote_5 = (n / 10) * 5;
-  return Math.round(vote_5 * 2) / 2;
 }

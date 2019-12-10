@@ -47,6 +47,8 @@
 
 .search-container {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .search-container input {
   width: 350px;

@@ -2,13 +2,24 @@ import React from 'react';
 import MovieItem from '../MovieItem';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import ContentLoader from '../ContentLoader';
 import '../../style/MovieList.css';
 
-export default function MovieList() {
+export default function MovieList({ type }) {
   return (
     <Query query={NowPlayingQuery}>
       {({ loading, error, data }) => {
-        if (loading) return <div>LOADING</div>;
+        if (loading)
+          return (
+            <div>
+              <h2 className="playing-now">
+                {type === 'now_playing'
+                  ? 'Now Playing Movies'
+                  : 'Top Rated Movies'}
+              </h2>
+              <ContentLoader />
+            </div>
+          );
         if (error) return <div>SERVER ERROR</div>;
         return (
           <div className="row p-2">
@@ -16,7 +27,11 @@ export default function MovieList() {
               {data.NowPlaying === '' ? (
                 <h2 className="playing-now">No Film are being played now</h2>
               ) : (
-                <h2 className="playing-now">Playing Now</h2>
+                <h2 className="playing-now">
+                  {type === 'now_playing'
+                    ? 'Now Playing Movies'
+                    : 'Top Rated Movies'}
+                </h2>
               )}
             </div>
             {data.NowPlaying.map((movie, i) => (
