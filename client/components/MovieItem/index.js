@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { average_on_five } from '../../utils';
 import BeautyStars from 'beauty-stars';
+import '../../style/MovieItem.css';
 
 export default function FilmItem({ movie }) {
   const average = average_on_five(movie.vote_average);

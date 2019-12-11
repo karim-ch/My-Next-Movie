@@ -40,16 +40,28 @@ const MovieDetailsType = new GraphQLObjectType({
   }
 });
 
+// Search Query
+const SearchType = new GraphQLObjectType({
+  name: 'Search',
+  fields: {
+    id: { type: GraphQLInt },
+    poster_path: { type: GraphQLString },
+    title: { type: GraphQLString },
+    vote_average: { type: GraphQLFloat }
+  }
+});
+
 // Root Query
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    NowPlaying: {
+    moviesList: {
       type: new GraphQLList(NewPlayingType),
-      resolve() {
+      args: { req: { type: GraphQLString } },
+      resolve(parentValue, args) {
         return axios
           .get(
-            `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=1`
+            `https://api.themoviedb.org/3/movie/${args.req}?api_key=${api_key}&language=en-US&page=1`
           )
           .then(res => {
             const movies = res.data.results;
@@ -63,24 +75,6 @@ const RootQuery = new GraphQLObjectType({
       }
     },
 
-    TopRated: {
-      type: new GraphQLList(NewPlayingType),
-      resolve() {
-        return axios
-          .get(
-            `https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}&language=en-US&page=1`
-          )
-          .then(res => {
-            const movies = res.data.results;
-            movies.map(
-              movie =>
-                (movie.poster_path =
-                  'https://image.tmdb.org/t/p/w500' + movie.poster_path)
-            );
-            return movies;
-          });
-      }
-    },
     movieDetails: {
       type: MovieDetailsType,
       args: { id: { type: GraphQLString } },
@@ -90,12 +84,38 @@ const RootQuery = new GraphQLObjectType({
             `https://api.themoviedb.org/3/movie/${args.id}?api_key=${api_key}&language=en-US&page=1`
           )
           .then(res => {
-            const movie = res.data;
-            movie.genres = movie.genres.map(g => g.name).join(', ');
-            movie.production_companies = movie.production_companies
-              .map(g => g.name)
-              .join(', ');
-            return movie;
+            if (res) {
+              const movie = res.data;
+              movie.genres = movie.genres.map(g => g.name).join(', ');
+              movie.production_companies = movie.production_companies
+                .map(g => g.name)
+                .join(', ');
+              return movie;
+            }
+            return [];
+          });
+      }
+    },
+
+    searchMovies: {
+      type: new GraphQLList(SearchType),
+      args: { search: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${args.search}&language=en-US&page=1`
+          )
+          .then(res => {
+            if (res.data.results) {
+              const movies = res.data.results;
+              movies.map(
+                movie =>
+                  (movie.poster_path =
+                    'https://image.tmdb.org/t/p/w500' + movie.poster_path)
+              );
+              return movies;
+            }
+            return [];
           });
       }
     }

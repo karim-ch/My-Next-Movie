@@ -6,6 +6,7 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './components/Home';
 import Details from './components/Details';
+import SearchContainer from './components/SearchContainer';
 import './style/App.css';
 import { url } from '../config';
 
@@ -21,6 +22,7 @@ const Root = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:id" component={Details} />
+            <Route exact path="/search/:search" component={SearchContainer} />
           </Switch>
         </ApolloProvider>
       </HashRouter>
