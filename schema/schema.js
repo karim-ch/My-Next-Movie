@@ -4,7 +4,8 @@ import {
   GraphQLInt,
   GraphQLSchema,
   GraphQLList,
-  GraphQLFloat
+  GraphQLFloat,
+  GraphQLInputObjectType
 } from 'graphql';
 
 import axios from 'axios';
@@ -57,11 +58,14 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     moviesList: {
       type: new GraphQLList(NewPlayingType),
-      args: { req: { type: GraphQLString } },
+      args: {
+        req: { type: GraphQLString },
+        indexValue: { type: GraphQLInt }
+      },
       resolve(parentValue, args) {
         return axios
           .get(
-            `https://api.themoviedb.org/3/movie/${args.req}?api_key=${api_key}&language=en-US&page=1`
+            `https://api.themoviedb.org/3/movie/${args.req}?api_key=${api_key}&language=en-US&page=${args.indexValue}`
           )
           .then(res => {
             const movies = res.data.results;

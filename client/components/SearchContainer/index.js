@@ -107,9 +107,8 @@ export default function SearchContainer(props) {
             <a href="#" className="arrow left"></a>
           </p>
 
-          <div>
+          <div className="search-cards">
             <div className="search-filter-card">
-              <div className="search-section" />
               <p className="search-title-right">
                 Search for a Movie/Tv show...
               </p>
@@ -156,11 +155,12 @@ export default function SearchContainer(props) {
                 </ul>
               </nav>
             </div>
+            <div className="search-section" />
 
             <div className="search-filter-card">
-              <div className="search-section" />
               <p className="search-title-right">Filter search by</p>
             </div>
+            <div className="search-section" />
           </div>
         </div>
 
@@ -169,7 +169,7 @@ export default function SearchContainer(props) {
         <div className="col-lg-8 col-md-6 col-sm-6">
           <div className="row">
             <div className="col-12 search-result-count">
-              <div className="search-title">{`${data.searchMovies.length}Search Result for : ${search}`}</div>
+              <div className="search-title">{`${data.searchMovies.length} Search Result for : ${search}`}</div>
             </div>
             {data.searchMovies.map((movie, i) => (
               <div key={i} className="col-lg-4 col-md-6 col-sm-6 mb-4">
