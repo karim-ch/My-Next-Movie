@@ -30,10 +30,16 @@
 }
 
 .search-filter-card {
+  display: flex;
+  flex-direction: column;
   padding: 17px;
   border: solid;
   box-shadow: -1px 4px 7px 1px #888893;
   margin-top: 20px;
+}
+
+.filter-form {
+  padding: 10px;
 }
 
 .search-cards {
@@ -144,4 +150,21 @@
 
 #button-see-more:hover a {
   color: #fff;
+}
+
+.form-input {
+  margin-top: 0.6rem;
+  margin-right: 0.7rem;
+}
+
+.form-check {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  color: black;
+}
+
+.form-filter {
+  display: flex;
+  flex-direction: column;
 }

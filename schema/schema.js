@@ -48,7 +48,8 @@ const SearchType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     poster_path: { type: GraphQLString },
     title: { type: GraphQLString },
-    vote_average: { type: GraphQLFloat }
+    vote_average: { type: GraphQLFloat },
+    release_date: { type: GraphQLString }
   }
 });
 
