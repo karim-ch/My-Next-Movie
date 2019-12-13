@@ -35,12 +35,6 @@
   justify-content: center;
 }
 
-a {
-  color: #efae1c;
-  text-decoration: none;
-  letter-spacing: 1px;
-}
-
 #button-see-more {
   position: relative;
   overflow: hidden;
@@ -50,6 +44,9 @@ a {
 #button-see-more a {
   position: relative;
   transition: all 0.45s ease-Out;
+  color: #efae1c;
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
 #spin {

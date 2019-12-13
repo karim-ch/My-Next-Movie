@@ -103,20 +103,22 @@ const RootQuery = new GraphQLObjectType({
 
     searchMovies: {
       type: new GraphQLList(SearchType),
-      args: { search: { type: GraphQLString } },
+      args: {
+        search: { type: GraphQLString },
+        indexValue: { type: GraphQLInt }
+      },
       resolve(parentValue, args) {
         return axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${args.search}&language=en-US&page=1`
+            `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${args.search}&language=en-US&page=${args.indexValue}`
           )
           .then(res => {
             if (res.data.results) {
               const movies = res.data.results;
-              movies.map(
-                movie =>
-                  (movie.poster_path =
-                    'https://image.tmdb.org/t/p/w500' + movie.poster_path)
-              );
+              movies.map(movie => {
+                movie.poster_path =
+                  'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+              });
               return movies;
             }
             return [];

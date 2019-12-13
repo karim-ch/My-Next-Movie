@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import MovieItem from '../MovieItem';
@@ -6,8 +6,21 @@ import '../../style/SearchContainer.css';
 
 export default function SearchContainer(props) {
   const [search, setSearch] = useState(props.match.params.search);
+  const [paginatedData, setPaginatedData] = useState([]);
+  const index = useIndex(1);
+  const indexValue = index.value;
+
   const [input, setInput] = useState(search);
-  const { loading, error, data } = useQuery(query, { variables: { search } });
+  const { loading, error, data } = useQuery(query, {
+    variables: { search, indexValue }
+  });
+
+  useEffect(() => {
+    if (data) {
+      setPaginatedData(paginatedData.concat(data.searchMovies));
+    }
+  }, [data]);
+
   if (error) return `Error! ${error.message}`;
 
   if (loading)
@@ -19,11 +32,9 @@ export default function SearchContainer(props) {
               <a href="#" className="arrow left"></a>
             </p>
 
-            <div>
+            <div className="search-cards">
               <div className="search-filter-card">
-                <div className="search-section" />
                 <p className="search-title-right">
-                  {' '}
                   Search for a Movie/Tv show...
                 </p>
                 <input
@@ -38,53 +49,13 @@ export default function SearchContainer(props) {
                   }}
                   value={input}
                 />
-                <nav style={{ paddingTop: '30px' }} aria-label="...">
-                  <ul className="pagination">
-                    <li className="page-item disabled">
-                      <a className="page-link" href="#" tabIndex="-1">
-                        Previous
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item active">
-                      <a className="page-link" href="#">
-                        2 <span className="sr-only">(current)</span>
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        Next
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
               </div>
+              <div className="search-section" />
 
               <div className="search-filter-card">
-                <div className="search-section" />
                 <p className="search-title-right">Filter search by</p>
-                <input
-                  className="form-control"
-                  onChange={event => {
-                    if (event.target.value.length > 1) {
-                      setSearch(event.target.value);
-                      setInput(event.target.value);
-                    } else {
-                      setInput(event.target.value);
-                    }
-                  }}
-                  value={input}
-                />
               </div>
+              <div className="search-section" />
             </div>
           </div>
 
@@ -124,36 +95,6 @@ export default function SearchContainer(props) {
                 }}
                 value={input}
               />
-
-              <nav style={{ paddingTop: '30px' }} aria-label="...">
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a className="page-link" href="#" tabIndex="-1">
-                      Previous
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="#">
-                      2 <span className="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </nav>
             </div>
             <div className="search-section" />
 
@@ -169,13 +110,19 @@ export default function SearchContainer(props) {
         <div className="col-lg-8 col-md-6 col-sm-6">
           <div className="row">
             <div className="col-12 search-result-count">
-              <div className="search-title">{`${data.searchMovies.length} Search Result for : ${search}`}</div>
+              <div className="search-title">{`${paginatedData.length} Search Result for : ${search}`}</div>
             </div>
-            {data.searchMovies.map((movie, i) => (
+            {paginatedData.map((movie, i) => (
               <div key={i} className="col-lg-4 col-md-6 col-sm-6 mb-4">
-                <MovieItem style={{}} movie={movie} />
+                <MovieItem movie={movie} />
               </div>
             ))}
+          </div>
+          <div className="row search-btn-section">
+            <div {...index} className="button" id="button-see-more">
+              <div id="spin"></div>
+              <a>See More</a>
+            </div>
           </div>
         </div>
       </div>
@@ -183,9 +130,20 @@ export default function SearchContainer(props) {
   );
 }
 
+function useIndex(initialValue) {
+  const [index, setIndex] = useState(initialValue);
+  function handleIncrementIndex() {
+    setIndex(index + 1);
+  }
+  return {
+    value: index,
+    onClick: handleIncrementIndex
+  };
+}
+
 const query = gql`
-  query SearchMovies($search: String) {
-    searchMovies(search: $search) {
+  query SearchMovies($search: String, $indexValue: Int) {
+    searchMovies(search: $search, indexValue: $indexValue) {
       id
       poster_path
       title
