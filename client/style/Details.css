@@ -33,7 +33,7 @@
 .movie-photo-container {
   position: relative;
   width: 400px;
-  height: 500px;
+  height: 450px;
 }
 .movie-photo {
   position: absolute;
@@ -105,10 +105,8 @@
 
 .videos {
   clear: both;
-  padding-left: 31px;
+  padding-left: 30px;
   position: relative;
-  padding: 30px 0;
-  margin: 60px 0;
   z-index: 6;
 }
 .videos:after {
@@ -155,12 +153,6 @@
 
   .movie-details {
     height: 250px;
-  }
-
-  .movie-photo-container {
-    position: relative;
-    width: 200px;
-    height: 300px;
   }
 
   .movie-details > div {

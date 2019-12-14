@@ -1,14 +1,18 @@
 {
   "name": "movie-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movies App Website using Graphql",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js  --ignore client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node server.js  --ignore client"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "node",
+    "graphql",
+    "react",
+    "react-hooks"
+  ],
+  "author": "Karim Chaâri",
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.19.0",
