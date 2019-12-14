@@ -1,14 +1,54 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import BeautyStars from 'beauty-stars';
-import MovieCredit from '../MovieCredit';
+import Actors from '../Actors';
 import { average_on_five } from '../../utils';
 import '../../style/Details.css';
 
 export default function Details(props) {
   const id = props.match.params.id;
   const { loading, error, data } = useQuery(query, { variables: { id } });
+  const [video, setVideo] = useState(null);
+
+  function renderVideos(videos) {
+    return videos.map(video => {
+      return (
+        <img
+          key={video.id}
+          onClick={() => videoDisplay(video.key)}
+          className="video_thumbs"
+          src={`http://img.youtube.com/vi/${video.key}/0.jpg`}
+          alt=""
+        />
+      );
+    });
+  }
+
+  function videoDisplay(video) {
+    setVideo(video);
+  }
+
+  function videoToggle() {
+    if (video)
+      return (
+        <div className="youtube-video">
+          <p onClick={() => videoExit()}>Close</p>
+          <iframe
+            width="560"
+            height="315"
+            src={`//www.youtube.com/embed/${video}`}
+            frameBorder="0"
+            allowFullScreen
+          />
+        </div>
+      );
+  }
+
+  function videoExit() {
+    setVideo(null);
+  }
+
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
   const average = average_on_five(data.movieDetails.vote_average);
@@ -67,15 +107,23 @@ export default function Details(props) {
         <div className="col-lg-2"></div>
       </div>
 
+      {/******************** VIDEOS ******************/}
+      <div className="row actor-row">
+        <h2 className="title-details-actors">Videos</h2>
+      </div>
+
+      <div className="row videos">
+        <div>
+          {videoToggle()}
+          {renderVideos(data.movieDetails.videos)}
+        </div>
+      </div>
+      {/********************* ACTORS ************/}
       <div className="row actor-row">
         <h2 className="title-details-actors">Actors</h2>
       </div>
       <div className="row">
-        {data.movieDetails.movieCredits.map((movieCredit, i) => (
-          <div key={i} className="col-lg-4 col-md-6 col-sm-6 mb-4">
-            <MovieCredit movieCredit={movieCredit} />
-          </div>
-        ))}
+        <Actors actors={data.movieDetails.movieCredits} />
       </div>
     </Fragment>
   );
@@ -98,6 +146,10 @@ const query = gql`
         name
         profile_path
         order
+      }
+      videos {
+        id
+        key
       }
     }
   }

@@ -23,7 +23,7 @@ const NewPlayingType = new GraphQLObjectType({
   }
 });
 
-//Credits
+//Actors
 const MovieCreditsType = new GraphQLObjectType({
   name: 'MovieCredits',
   fields: {
@@ -32,6 +32,15 @@ const MovieCreditsType = new GraphQLObjectType({
     name: { type: GraphQLString },
     profile_path: { type: GraphQLString },
     order: { type: GraphQLString }
+  }
+});
+
+// Videos
+const VideoType = new GraphQLObjectType({
+  name: 'Video',
+  fields: {
+    id: { type: GraphQLString },
+    key: { type: GraphQLString }
   }
 });
 
@@ -57,7 +66,22 @@ const MovieDetailsType = new GraphQLObjectType({
           .get(
             `https://api.themoviedb.org/3/movie/${parentValue.id}/credits?api_key=${api_key}&language=en-US&page=1`
           )
-          .then(res => res.data.cast.filter(cast => cast.profile_path));
+          .then(res =>
+            res.data.cast.filter(cast => {
+              if (cast.profile_path && cast.order < 12) return cast;
+            })
+          );
+      }
+    },
+    videos: {
+      type: new GraphQLList(VideoType),
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${parentValue.id}/videos?api_key=${api_key}&language=en-US`
+          )
+          .then(res => res.data.results);
       }
     }
   }
@@ -99,6 +123,18 @@ const RootQuery = new GraphQLObjectType({
             );
             return movies;
           });
+      }
+    },
+
+    videos: {
+      type: new GraphQLList(VideoType),
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${args.id}/videos?api_key=${api_key}&language=en-US`
+          )
+          .then(res => res.data.results);
       }
     },
 
