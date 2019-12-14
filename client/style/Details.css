@@ -87,6 +87,16 @@
   color: black;
   font-size: 3rem;
 }
+
+.actor-row {
+  justify-content: center;
+}
+
+.title-details-actors {
+  color: black;
+  font-size: 3rem;
+}
+
 .title-details-text {
   color: black;
   font-size: 1rem;

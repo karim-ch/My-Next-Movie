@@ -4,8 +4,7 @@ import {
   GraphQLInt,
   GraphQLSchema,
   GraphQLList,
-  GraphQLFloat,
-  GraphQLInputObjectType
+  GraphQLFloat
 } from 'graphql';
 
 import axios from 'axios';
@@ -24,6 +23,18 @@ const NewPlayingType = new GraphQLObjectType({
   }
 });
 
+//Credits
+const MovieCreditsType = new GraphQLObjectType({
+  name: 'MovieCredits',
+  fields: {
+    id: { type: GraphQLString },
+    character: { type: GraphQLString },
+    name: { type: GraphQLString },
+    profile_path: { type: GraphQLString },
+    order: { type: GraphQLString }
+  }
+});
+
 // Get movie details
 const MovieDetailsType = new GraphQLObjectType({
   name: 'MovieDetails',
@@ -37,7 +48,18 @@ const MovieDetailsType = new GraphQLObjectType({
     vote_average: { type: GraphQLString },
     production_companies: { type: GraphQLString },
     vote_average: { type: GraphQLString },
-    runtime: { type: GraphQLString }
+    runtime: { type: GraphQLString },
+    movieCredits: {
+      type: new GraphQLList(MovieCreditsType),
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${parentValue.id}/credits?api_key=${api_key}&language=en-US&page=1`
+          )
+          .then(res => res.data.cast.filter(cast => cast.profile_path));
+      }
+    }
   }
 });
 

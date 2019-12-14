@@ -1,0 +1,19 @@
+.actor-overlay {
+  width: 100%;
+  height: 210px;
+  background-color: rgba(113, 115, 164, 0.4);
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  color: #fff;
+  flex-direction: column;
+}
+.actor-overlay div:nth-child(1) {
+  text-align: center;
+}
+.actor-data:hover .actor-overlay {
+  opacity: 1;
+}

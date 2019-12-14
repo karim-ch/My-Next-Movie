@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import BeautyStars from 'beauty-stars';
+import MovieCredit from '../MovieCredit';
 import { average_on_five } from '../../utils';
 import '../../style/Details.css';
 
@@ -65,6 +66,17 @@ export default function Details(props) {
         </div>
         <div className="col-lg-2"></div>
       </div>
+
+      <div className="row actor-row">
+        <h2 className="title-details-actors">Actors</h2>
+      </div>
+      <div className="row">
+        {data.movieDetails.movieCredits.map((movieCredit, i) => (
+          <div key={i} className="col-lg-4 col-md-6 col-sm-6 mb-4">
+            <MovieCredit movieCredit={movieCredit} />
+          </div>
+        ))}
+      </div>
     </Fragment>
   );
 }
@@ -80,6 +92,13 @@ const query = gql`
       vote_average
       runtime
       production_companies
+      movieCredits {
+        id
+        character
+        name
+        profile_path
+        order
+      }
     }
   }
 `;
