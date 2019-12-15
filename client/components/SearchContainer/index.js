@@ -294,6 +294,7 @@ const query = gql`
  */
 
 function filterRatingMovies(ratingFilter, d) {
+  console.log(ratingFilter);
   let t = d;
   switch (ratingFilter) {
     case 1:
@@ -307,6 +308,7 @@ function filterRatingMovies(ratingFilter, d) {
     default:
       break;
   }
+  console.log(t);
   return t;
 }
 
@@ -327,15 +329,10 @@ function NewMovies(a, b) {
   const A = a.release_date;
   const B = b.release_date;
 
-  let comparison = 0;
-  if (parseInt(A.replace(/-/g, ''), 10) > parseInt(B.replace(/-/g, ''), 10)) {
-    comparison = 1;
-  } else if (
-    parseInt(A.replace(/-/g, ''), 10) > parseInt(B.replace(/-/g, ''), 10)
-  ) {
-    comparison = -1;
-  }
-  return comparison;
+  if (A !== '' && B !== '') {
+    if (parseInt(A.replace(/-/g, ''), 10) > parseInt(B.replace(/-/g, ''), 10))
+      return -1;
+  } else return 1;
 }
 
 //----------------------------------------------------------------------------------------------
