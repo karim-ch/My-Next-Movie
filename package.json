@@ -4,7 +4,7 @@
   "description": "Movies App Website using Graphql",
   "main": "index.js",
   "scripts": {
-    "build": "nodemon --exec babel-node server.js  --ignore client"
+    "build": "node --exec babel-node server.js  --ignore client"
   },
   "keywords": [
     "node",
